@@ -1,7 +1,7 @@
 Lab 03 - Nobel laureates
 ================
-Insert your name here
-Insert date here
+Lindley Slipetz
+02/09/2021
 
 ### Load packages and data
 
