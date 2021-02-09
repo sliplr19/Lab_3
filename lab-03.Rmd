@@ -61,20 +61,37 @@ The claim that most nobels come from the US is supported. It remains to be seen 
 ### Exercise 4
 
 ```{r create_bcu}
-nobel_born <- nobel %>%
+nobel_living <- nobel_living %>%
   mutate(
     born_country_us = if_else(born_country == "USA",
                               "USA", "Other") 
                 )
-count(nobel_born, vars = born_country_us)
+count(nobel_living, vars = born_country_us)
 ```
 
-636 nobel laureates were born in other countries, 271 were born in the US, and 28 are unknown.
+123 were born in countries other than the US, while 105 were born in the US.
 
 ### Exercise 5
 
-...
+```{r bar_graph_2}
+ggplot(nobel_living, aes(x=factor(country_us), fill = born_country_us))+
+  geom_bar(stat="count", width=0.7)+
+  facet_wrap(~category, nrow = 2) +
+  labs(x = "Country of Nobel", fill = "Birth place",
+      title = "US vs other countries for Nobel laureates by category") +
+  coord_flip() +
+    scale_fill_manual(values=c("black", "#999999"))
+```
+Except for Economics, each category has a sizeable proportion of nobel laureates born outside the US, even if they received the prize in the US. It seems that if we added the black portions of the bar plots together, it would be greater than the portions with US-born nobel laureates. Hence, I agree with the Buzzfeed article.
 
 ### Exercise 6
 
-...
+```{r where_born}
+nobel %>%
+  filter(born_country != "USA", 
+         country == "USA") %>%
+  count(vars = born_country) %>%
+  arrange(desc(n))
+```
+
+The most common country is the UK.
