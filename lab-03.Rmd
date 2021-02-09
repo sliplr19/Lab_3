@@ -60,7 +60,16 @@ The claim that most nobels come from the US is supported. It remains to be seen 
 
 ### Exercise 4
 
-...
+```{r create_bcu}
+nobel_born <- nobel %>%
+  mutate(
+    born_country_us = if_else(born_country == "USA",
+                              "USA", "Other") 
+                )
+count(nobel_born, vars = born_country_us)
+```
+
+636 nobel laureates were born in other countries, 271 were born in the US, and 28 are unknown.
 
 ### Exercise 5
 

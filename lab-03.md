@@ -91,7 +91,24 @@ from the US, they come from other countries.
 
 ### Exercise 4
 
-…
+``` r
+nobel_born <- nobel %>%
+  mutate(
+    born_country_us = if_else(born_country == "USA",
+                              "USA", "Other") 
+                )
+count(nobel_born, vars = born_country_us)
+```
+
+    ## # A tibble: 3 x 2
+    ##   vars      n
+    ##   <chr> <int>
+    ## 1 Other   636
+    ## 2 USA     271
+    ## 3 <NA>     28
+
+636 nobel laureates were born in other countries, 271 were born in the
+US, and 28 are unknown.
 
 ### Exercise 5
 
