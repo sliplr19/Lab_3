@@ -54,9 +54,12 @@ There are 935 rows and 26 columns. The rows represent nobel laureates.
 
 ### Exercise 2
 
-Remove this text, and add your answer for Exercise 1 here. Add code
-chunks as needed. Don’t forget to label your code chunk. Do not use
-spaces in code chunk labels.
+``` r
+nobel_living <- nobel %>%
+  filter(is.na(country) == FALSE,
+         gender != "org",
+         is.na(died_date))
+```
 
 ### Exercise 3
 
