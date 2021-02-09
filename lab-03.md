@@ -63,9 +63,31 @@ nobel_living <- nobel %>%
 
 ### Exercise 3
 
-Remove this text, and add your answer for Exercise 1 here. Add code
-chunks as needed. Don’t forget to label your code chunk. Do not use
-spaces in code chunk labels.
+``` r
+nobel_living <- nobel_living %>%
+  mutate(
+    country_us = if_else(country == "USA", "USA", 
+                         "Other")
+                )
+```
+
+``` r
+nobel_living_science <- nobel_living %>%
+  filter(category %in% c("Physics", "Medicine", "Chemistry", "Economics"))
+```
+
+``` r
+ggplot(nobel_living, aes(x=factor(country_us)))+
+  geom_bar(stat="count", width=0.7, fill="black")+
+  facet_wrap(~category, nrow = 2) +
+  labs(x = "Country of Nobel", 
+      title = "US vs other countries for Nobel laureates by category") +
+  coord_flip()
+```
+
+![](lab-03_files/figure-gfm/bar_graph-1.png)<!-- --> The claim that most
+nobels come from the US is supported. It remains to be seen if, of those
+from the US, they come from other countries.
 
 ### Exercise 4
 
